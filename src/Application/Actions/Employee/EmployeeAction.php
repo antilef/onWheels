@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Actions\User;
+namespace App\Application\Actions\Employee;
 
 use App\Application\Actions\Action;
 use App\Domain\Employee\EmployeeRepository;
 use Psr\Log\LoggerInterface;
 
-abstract class UserAction extends Action
+abstract class EmployeeAction extends Action
 {
     /**
      * @var EmployeeRepository
