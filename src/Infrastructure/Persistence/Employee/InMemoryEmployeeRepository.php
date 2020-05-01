@@ -13,16 +13,16 @@ class InMemoryEmployeeRepository implements EmployeeRepository
     /**
      * @var User[]
      */
-    private $users;
+    private $employees;
 
     /**
      * InMemoryEmployeeRepository constructor.
      *
-     * @param array|null $users
+     * @param array|null $employees
      */
-    public function __construct(array $users = null)
+    public function __construct(array $employees = null)
     {
-        $this->users = $users ?? [
+        $this->employees = $employees ?? [
             1 => new Employee(1, 'bill.gates', 'Bill', 'Gates'),
             2 => new Employee(2, 'steve.jobs', 'Steve', 'Jobs'),
             3 => new Employee(3, 'mark.zuckerberg', 'Mark', 'Zuckerberg'),
@@ -36,7 +36,7 @@ class InMemoryEmployeeRepository implements EmployeeRepository
      */
     public function findAll(): array
     {
-        return array_values($this->users);
+        return array_values($this->employees);
     }
 
     /**
@@ -44,10 +44,10 @@ class InMemoryEmployeeRepository implements EmployeeRepository
      */
     public function findUserOfId(int $id): User
     {
-        if (!isset($this->users[$id])) {
+        if (!isset($this->employees[$id])) {
             throw new UserNotFoundException();
         }
 
-        return $this->users[$id];
+        return $this->employees[$id];
     }
 }
