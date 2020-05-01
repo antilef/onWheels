@@ -7,7 +7,7 @@ matrix:
   - php: 7.2
   - php: 7.3
     env: ANALYSIS='true'
-
+  - php: 7.4
   allow_failures:
   - php: nightly
 
