@@ -16,5 +16,4 @@ class BicycleTest extends TestCase
         $this->assertEquals("oxford",$bicycle->getBrand());
         $this->assertEquals("MERAK 1",$bicycle->getModel());
     }
-
 }
