@@ -46,7 +46,7 @@ class UserTest extends TestCase
      */
     public function testJsonSerialize($id, $username, $firstName, $lastName)
     {
-        $user = new Employee($id, $username, $firstName, $lastName);
+        $user = new Employee($id, $username, $firstName);
 
         $expectedPayload = json_encode([
             'id' => $id,
