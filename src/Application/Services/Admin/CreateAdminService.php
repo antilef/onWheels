@@ -4,8 +4,10 @@
 namespace App\Application\Services\Admin;
 
 
+use App\Domain\Admin\Admin;
 use App\Domain\Admin\AdminRepository;
-use App\Domain\Employee\Admin;
+
+use App\Domain\Shared\PasswordHash;
 
 class CreateAdminService
 {
@@ -20,8 +22,8 @@ class CreateAdminService
      */
     public function __construct(AdminRepository $adminRepository,PasswordHash $passwordHash)
     {
-        $this->$adminRepository = $adminRepository;
-        $this->$passwordHash = $passwordHash;
+        $this->adminRepository = $adminRepository;
+        $this->passwordHash = $passwordHash;
     }
 
     public function execute(string $name, string $surname, string $password, string $email):Admin {

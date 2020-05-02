@@ -43,7 +43,7 @@ abstract class User implements JsonSerializable
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
-        $this->password = $this->changePassword($password);
+        $this->password = $password;
     }
 
     /**
@@ -87,6 +87,15 @@ abstract class User implements JsonSerializable
     }
 
     /**
+     * @return void
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+
+    /**
      * @return array
      */
     public function jsonSerialize()
@@ -101,9 +110,6 @@ abstract class User implements JsonSerializable
 
     private function changePassword(string $password)
     {
-        if(strlen($password)<8 ){
-            throw new PasswordTooShort();
-        }
         $this->setPassword($password);
     }
 }

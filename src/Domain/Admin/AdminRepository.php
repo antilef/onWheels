@@ -6,9 +6,9 @@ namespace App\Domain\Admin;
 
 interface AdminRepository
 {
-    public function save();
+    public function save(Admin $admin):Admin;
 
-    public function findById();
+    public function findById(int $id):Admin;
 
-    public function findByEmail();
+    public function findByEmail(string $email):Admin;
 }
