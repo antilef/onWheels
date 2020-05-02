@@ -12,11 +12,11 @@ class UserTest extends TestCase
     public function userProvider()
     {
         return [
-            [1, 'bill.gates', 'Bill', 'Gates'],
-            [2, 'steve.jobs', 'Steve', 'Jobs'],
-            [3, 'mark.zuckerberg', 'Mark', 'Zuckerberg'],
-            [4, 'evan.spiegel', 'Evan', 'Spiegel'],
-            [5, 'jack.dorsey', 'Jack', 'Dorsey'],
+            [1, 'bill.gates', 'Bill', 'GatesGates','example@onwheels.com'],
+            [2, 'steve.jobs', 'Steve', 'JobsGates','example@onwheels.com'],
+            [3, 'mark.zuckerberg', 'Mark', 'ZuckerbergGates','example@onwheels.com'],
+            [4, 'evan.spiegel', 'Evan', 'SpiegelGates','example@onwheels.com'],
+            [5, 'jack.dorsey', 'Jack', 'DorseyGates','example@onwheels.com'],
         ];
     }
 
@@ -24,35 +24,37 @@ class UserTest extends TestCase
      * @dataProvider userProvider
      * @param $id
      * @param $username
-     * @param $firstName
-     * @param $lastName
+     * @param $surname
+     * @param $password
+     * @param $email
+     * @throws \App\Domain\Employee\PasswordTooShort
      */
-    public function testGetters($id, $username, $firstName, $lastName)
+    public function testGetters($id, $username, $surname, $password, $email)
     {
-        $user = new Employee($id, $username, $firstName, $lastName);
-
+        $user = new Employee($id, $username, $surname, $password,$email);
         $this->assertEquals($id, $user->getId());
-        $this->assertEquals($username, $user->getUsername());
-        $this->assertEquals($firstName, $user->getFirstName());
-        $this->assertEquals($lastName, $user->getLastName());
+        $this->assertEquals($username, $user->getName());
+        $this->assertEquals($surname, $user->getSurname());
     }
 
     /**
      * @dataProvider userProvider
      * @param $id
-     * @param $username
-     * @param $firstName
-     * @param $lastName
+     * @param $name
+     * @param $surname
+     * @param $password
+     * @param $email
+     * @throws \App\Domain\Employee\PasswordTooShort
      */
-    public function testJsonSerialize($id, $username, $firstName, $lastName)
+    public function testJsonSerialize($id, $name, $surname, $password, $email)
     {
-        $user = new Employee($id, $username, $firstName, $lastName);
+        $user = new Employee($id, $name, $surname, $password,$email);
 
         $expectedPayload = json_encode([
             'id' => $id,
-            'username' => $username,
-            'firstName' => $firstName,
-            'lastName' => $lastName,
+            'name' => $name,
+            'surname' => $surname,
+            'email' => $email
         ]);
 
         $this->assertEquals($expectedPayload, json_encode($user));

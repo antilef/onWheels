@@ -12,10 +12,10 @@ class ListEmployeeAction extends EmployeeAction
      */
     protected function action(): Response
     {
-        $users = $this->userRepository->findAll();
-
-        $this->logger->info("Users list was viewed.");
-
-        return $this->respondWithData($users);
+//        $users = $this->userRepository->findAll();
+//
+//        $this->logger->info("Users list was viewed.");
+//
+        return $this->respondWithData([]);
     }
 }

@@ -13,7 +13,7 @@ class InMemoryUserRepositoryTest extends TestCase
 {
     public function testFindAll()
     {
-        $user = new Employee(1, 'bill.gates', 'Bill', 'Gates');
+        $user = new Employee(1, 'bill.gates', 'Bill', 'GatesGates','example@onwheels.com');
 
         $userRepository = new InMemoryEmployeeRepository([1 => $user]);
 
@@ -22,7 +22,7 @@ class InMemoryUserRepositoryTest extends TestCase
 
     public function testFindUserOfId()
     {
-        $user = new Employee(1, 'bill.gates', 'Bill', 'Gates');
+        $user = new Employee(1, 'bill.gates', 'Bill', 'GatesGates','example@onwheels.com');
 
         $userRepository = new InMemoryEmployeeRepository([1 => $user]);
 

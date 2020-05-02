@@ -10,6 +10,8 @@ use App\Domain\Employee\Admin;
 class CreateAdminService
 {
 
+    private $adminRepository;
+    private $passwordHash;
 
     /**
      * CreateAdminService constructor.
@@ -18,10 +20,15 @@ class CreateAdminService
      */
     public function __construct(AdminRepository $adminRepository,PasswordHash $passwordHash)
     {
+        $this->$adminRepository = $adminRepository;
+        $this->$passwordHash = $passwordHash;
     }
 
-    public function execute(string $name, string $surname, string $password, string $email):Admin{
-
+    public function execute(string $name, string $surname, string $password, string $email):Admin {
+        $hashPassword = $this->passwordHash->hash($password);
+        $newAdmin = new Admin(null,$name,$surname,$hashPassword,$email);
+        $newAdmin = $this->adminRepository->save($newAdmin);
+        return $newAdmin;
     }
 
 }

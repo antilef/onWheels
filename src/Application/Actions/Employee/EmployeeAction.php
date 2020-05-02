@@ -16,11 +16,9 @@ abstract class EmployeeAction extends Action
 
     /**
      * @param LoggerInterface $logger
-     * @param EmployeeRepository  $userRepository
      */
-    public function __construct(LoggerInterface $logger, EmployeeRepository $userRepository)
+    public function __construct(LoggerInterface $logger)
     {
         parent::__construct($logger);
-        $this->userRepository = $userRepository;
     }
 }

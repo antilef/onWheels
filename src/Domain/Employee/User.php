@@ -15,30 +15,35 @@ abstract class User implements JsonSerializable
     /**
      * @var string
      */
-    private $username;
+    private $name;
 
     /**
      * @var string
      */
-    private $firstName;
+    private $surname;
 
     /**
      * @var string
      */
-    private $lastName;
+    private $email;
+
+    private $password;
 
     /**
-     * @param int|null  $id
-     * @param string    $username
-     * @param string    $firstName
-     * @param string    $lastName
+     * @param int|null $id
+     * @param string $name
+     * @param string $surname
+     * @param string $password
+     * @param string $email
+     * @throws PasswordTooShort
      */
-    public function __construct(?int $id, string $username, string $firstName, string $lastName)
+    public function __construct(?int $id,string $name, string $surname, string $password, string $email)
     {
         $this->id = $id;
-        $this->username = strtolower($username);
-        $this->firstName = ucfirst($firstName);
-        $this->lastName = ucfirst($lastName);
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->email = $email;
+        $this->password = $this->changePassword($password);
     }
 
     /**
@@ -52,25 +57,33 @@ abstract class User implements JsonSerializable
     /**
      * @return string
      */
-    public function getUsername(): string
+    public function getName(): string
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getSurname(): string
     {
-        return $this->firstName;
+        return $this->surname;
+    }
+
+    /**
+     * @param string $password
+     */
+    protected function setPassword(string $password): void
+    {
+        $this->password = $password;
     }
 
     /**
      * @return string
      */
-    public function getLastName(): string
+    public function getEmail(): string
     {
-        return $this->lastName;
+        return $this->email;
     }
 
     /**
@@ -80,9 +93,17 @@ abstract class User implements JsonSerializable
     {
         return [
             'id' => $this->id,
-            'username' => $this->username,
-            'firstName' => $this->firstName,
-            'lastName' => $this->lastName,
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'email' => $this->email,
         ];
+    }
+
+    private function changePassword(string $password)
+    {
+        if(strlen($password)<8 ){
+            throw new PasswordTooShort();
+        }
+        $this->setPassword($password);
     }
 }
